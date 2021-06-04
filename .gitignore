@@ -1,0 +1,8 @@
+.cache
+node_modules
+dist
+stats.html
+.env
+
+# Local Netlify folder
+.netlify
