@@ -17,6 +17,14 @@ export const handler = withGraph(async (event, { graph }) => {
               name
             }
           }
+          me {
+            serviceMetadata {
+              loggedInServices {
+                friendlyServiceName
+                isLoggedIn
+              }
+            }
+          }
         }
       `
     )
@@ -25,5 +33,8 @@ export const handler = withGraph(async (event, { graph }) => {
   return {
     statusCode: 200,
     body: JSON.stringify(data),
+    headers: {
+      "content-type": "application/json",
+    },
   };
 });
