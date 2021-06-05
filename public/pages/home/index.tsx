@@ -100,9 +100,17 @@ export default function Home() {
 
         {token && (
           <>
-            <input value="ONEGRAPH_TOKEN" readonly />
-            <input value={token} readonly />
-
+            <p>
+              <input value="ONEGRAPH_TOKEN" readonly />
+              <input value={token} readonly />
+            </p>
+            <p>
+              <input
+                value={`netlify env:set ONEGRAPH_TOKEN "${token}"`}
+                readonly
+                style={{ minWidth: "50%", fontFamily: "monospace" }}
+              />
+            </p>
             <p>
               Copy or download the token <em>after</em> logging-in to all
               required services, as the token changes.{" "}
@@ -110,8 +118,7 @@ export default function Home() {
             <p>
               <a href={dataURI} download="netlify.env">
                 Download .env file
-              </a>{" "}
-              then run <code>netlify env:import ./netlify.env</code>
+              </a>
             </p>
           </>
         )}
