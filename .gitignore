@@ -6,3 +6,4 @@ stats.html
 
 # Local Netlify folder
 .netlify
+.DS_Store
