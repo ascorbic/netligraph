@@ -3,7 +3,15 @@ import { useCallback, useEffect, useState } from "preact/hooks";
 import OneGraphAuth from "onegraph-auth";
 
 const APP_ID = "b6a66044-13f0-4049-8d13-6d906de655d8";
-
+const blocklist = new Set([
+  "gmail",
+  "google",
+  "google-calendar",
+  "google-compute",
+  "google-docs",
+  "google-translate",
+  "zeit",
+]);
 export default function Home() {
   const [token, setToken] = useState("");
   const [auth, setAuth] = useState(undefined);
@@ -65,7 +73,7 @@ export default function Home() {
       <section class={styles.home}>
         <table>
           {auth?.supportedServices.map((service) => {
-            if (service === "zeit") {
+            if (blocklist.has(service)) {
               return;
             }
             const loggedIn = servicesStatus?.[service]?.isLoggedIn;
@@ -98,9 +106,12 @@ export default function Home() {
             <p>
               Copy or download the token <em>after</em> logging-in to all
               required services, as the token changes.{" "}
+            </p>
+            <p>
               <a href={dataURI} download="netlify.env">
-                Download .env
-              </a>
+                Download .env file
+              </a>{" "}
+              then run <code>netlify env:import ./netlify.env</code>
             </p>
           </>
         )}
